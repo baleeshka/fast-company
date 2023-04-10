@@ -1,24 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import api from '../api'
-
+let spanStyle = ''
 const Users = () => {
-	const spanRef = useRef(null)
 	const [users, setUsers] = useState(api.users.fetchAll())
-
-	useEffect(() => {
-		const span = spanRef.current
+	const renderPhrase = () => {
 		if (users.length < 1) {
-			span.className = 'badge bg-danger m-2'
-			span.textContent = 'Никто с тобой не тусанёт'
+			spanStyle = 'badge bg-danger m-2'
+			return 'Никто с тобой не тусанёт'
 		} else if (users.length < 5 && users.length !== 1) {
-			span.className = 'badge bg-primary m-2'
-			span.textContent = `${users.length} человека тусанут с тобой сегодня`
+			spanStyle = 'badge bg-primary m-2'
+			return `${users.length} человека тусанут с тобой сегодня`
 		} else if (users.length === 1 || users.length >= 5) {
-			span.className = 'badge bg-primary m-2'
-			span.textContent = `${users.length} человек тусанет с тобой сегодня`
+			spanStyle = 'badge bg-primary m-2'
+			return `${users.length} человек тусанет с тобой сегодня`
 		}
-	}, [users])
-
+		console.log(spanStyle)
+	}
 	const handleDelete = userId => {
 		const newUsers = users.filter(user => user._id !== userId)
 		setUsers(newUsers)
@@ -27,7 +24,7 @@ const Users = () => {
 	return (
 		<>
 			<h2>
-				<span className='badge' ref={spanRef}></span>
+				<span className={spanStyle}>{renderPhrase()}</span>
 			</h2>
 			{users.length > 0 && (
 				<table className='table'>
