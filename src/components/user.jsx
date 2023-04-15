@@ -1,7 +1,31 @@
 import React from 'react'
-import Qualitie from './qualitie'
+import QualitiesList from './qualitie'
 import BookMark from './bookmark'
 
-const User = () => {}
+const User = ({ user, onDelete, bookmarks, toggleBookmark }) => {
+	return (
+		<tr key={user._id}>
+			<td>{user.name}</td>
+			<td>
+				<QualitiesList qualities={user.qualities} />
+			</td>
+			<td>{user.profession.name}</td>
+			<td>{user.completedMeetings}</td>
+			<td>{user.rate}/5</td>
+			<td>
+				<BookMark
+					id={user._id}
+					bookmarks={bookmarks}
+					toggleBookmark={toggleBookmark}
+				/>
+			</td>
+			<td>
+				<button onClick={() => onDelete(user._id)} className='btn btn-danger'>
+					delete
+				</button>
+			</td>
+		</tr>
+	)
+}
 
 export default User
