@@ -5,10 +5,16 @@ import api from './api'
 
 function App() {
 	const [users, setUsers] = useState(api.users.fetchAll())
-	const [bookmarks, setBookmarks] = useState({})
 
-	const toggleBookmark = id => {
-		setBookmarks({ ...bookmarks, [id]: !bookmarks[id] })
+	const toggleBookmark = userId => {
+		const updatedUsers = users.map(user => {
+			if (user._id === userId) {
+				return { ...user, status: !user.status }
+			}
+			return user
+		})
+
+		setUsers(updatedUsers)
 	}
 
 	const handleDelete = userId => {
@@ -22,7 +28,6 @@ function App() {
 			<Users
 				users={users}
 				onDelete={handleDelete}
-				bookmarks={bookmarks}
 				toggleBookmark={toggleBookmark}
 			/>
 		</div>

@@ -2,7 +2,7 @@ import React from 'react'
 import QualitiesList from './qualitie'
 import BookMark from './bookmark'
 
-const User = ({ user, onDelete, bookmarks, toggleBookmark }) => {
+const User = ({ user, onDelete, toggleBookmark }) => {
 	return (
 		<tr key={user._id}>
 			<td>{user.name}</td>
@@ -14,9 +14,8 @@ const User = ({ user, onDelete, bookmarks, toggleBookmark }) => {
 			<td>{user.rate}/5</td>
 			<td>
 				<BookMark
-					id={user._id}
-					bookmarks={bookmarks}
-					toggleBookmark={toggleBookmark}
+					status={user.status}
+					toggleBookmark={() => toggleBookmark(user._id)}
 				/>
 			</td>
 			<td>

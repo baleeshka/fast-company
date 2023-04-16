@@ -1,7 +1,7 @@
 import React from 'react'
 import User from './user'
 
-const Users = ({ users, onDelete, bookmarks, toggleBookmark }) => {
+const Users = ({ users, onDelete, toggleBookmark }) => {
 	return (
 		<>
 			{users.length > 0 && (
@@ -13,6 +13,7 @@ const Users = ({ users, onDelete, bookmarks, toggleBookmark }) => {
 							<th scope='col'>Профессия</th>
 							<th scope='col'>Встретился, раз</th>
 							<th scope='col'>Оценка</th>
+							<th scope='col'></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -21,7 +22,6 @@ const Users = ({ users, onDelete, bookmarks, toggleBookmark }) => {
 								key={user._id}
 								user={user}
 								onDelete={onDelete}
-								bookmarks={bookmarks}
 								toggleBookmark={toggleBookmark}
 							/>
 						))}
