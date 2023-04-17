@@ -14,7 +14,7 @@ const User = ({ user, onDelete, toggleBookmark }) => {
 			<td>{user.rate}/5</td>
 			<td>
 				<BookMark
-					status={user.status}
+					bookmark={user.bookmark}
 					toggleBookmark={() => toggleBookmark(user._id)}
 				/>
 			</td>

@@ -1,12 +1,10 @@
 import React from 'react'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 
-const BookMark = ({ id, toggleBookmark, ...rest }) => {
-	const isBookmarked = rest.status || false
-
+const BookMark = ({ id, toggleBookmark, bookmark }) => {
 	return (
 		<div onClick={() => toggleBookmark(id)}>
-			{isBookmarked ? <BsBookmarkFill /> : <BsBookmark />}
+			{bookmark ? <BsBookmarkFill /> : <BsBookmark />}
 		</div>
 	)
 }

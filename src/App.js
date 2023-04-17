@@ -9,7 +9,7 @@ function App() {
 	const toggleBookmark = userId => {
 		const updatedUsers = users.map(user => {
 			if (user._id === userId) {
-				return { ...user, status: !user.status }
+				return { ...user, bookmark: !user.bookmark }
 			}
 			return user
 		})
