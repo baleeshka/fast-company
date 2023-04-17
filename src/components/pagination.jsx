@@ -8,7 +8,7 @@ const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
         onPageChange(1);
         return null;
     }
-    if (currentPage > pageCount) {
+    if (currentPage > pageCount && currentPage !== 1) {
         onPageChange(currentPage - 1);
     }
     const pages = _.range(1, pageCount + 1);
