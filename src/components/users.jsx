@@ -5,7 +5,7 @@ import api from "../api";
 import PropTypes from "prop-types";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
-import { paginate } from "../api/utils/paginate";
+import { paginate } from "../utils/paginate";
 
 const Users = ({ users, onDelete, toggleBookmark }) => {
     const pageSize = 4;
