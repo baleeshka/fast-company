@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Users from "./components/users";
 import api from "./api";
 
 function App() {
-    const [users, setUsers] = useState(api.users.fetchAll());
+    const [users, setUsers] = useState();
 
     const toggleBookmark = (userId) => {
         const updatedUsers = users.map((user) => {
@@ -20,14 +20,18 @@ function App() {
         const newUsers = users.filter((user) => user._id !== userId);
         setUsers(newUsers);
     };
-
+    useEffect(() => {
+        api.users.fetchAll().then((data) => setUsers(data));
+    }, []);
     return (
         <div className="container">
-            <Users
-                users={users}
-                onDelete={handleDelete}
-                toggleBookmark={toggleBookmark}
-            />
+            {users && (
+                <Users
+                    users={users}
+                    onDelete={handleDelete}
+                    toggleBookmark={toggleBookmark}
+                />
+            )}
         </div>
     );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 const GroupList = ({
     items,
     valueProperty,
@@ -7,32 +8,45 @@ const GroupList = ({
     onItemSelect,
     selectedItem
 }) => {
+    let listItems = [];
+    if (Array.isArray(items)) {
+        listItems = items;
+    } else if (typeof items === "object") {
+        listItems = Object.values(items);
+    }
+
     return (
         <div className="list-group">
-            {Object.keys(items).map((item) => (
+            {listItems.map((item) => (
                 <button
-                    key={items[item][valueProperty]}
+                    key={item[valueProperty]}
                     className={
                         "list-group-item list-group-item-action" +
-                        (items[item] === selectedItem ? " active" : "")
+                        (item === selectedItem ? " active" : "")
                     }
-                    onClick={() => onItemSelect(items[item])}
+                    onClick={() => onItemSelect(item)}
                 >
-                    {items[item][contentProperty]}
+                    {item[contentProperty]}
                 </button>
             ))}
         </div>
     );
 };
+
 GroupList.defaultProps = {
     valueProperty: "_id",
     contentProperty: "name"
 };
+
 GroupList.propTypes = {
-    items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+    items: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.object),
+        PropTypes.objectOf(PropTypes.object)
+    ]).isRequired,
     contentProperty: PropTypes.string.isRequired,
     valueProperty: PropTypes.string.isRequired,
     onItemSelect: PropTypes.func.isRequired,
     selectedItem: PropTypes.object
 };
+
 export default GroupList;
