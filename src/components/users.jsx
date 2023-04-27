@@ -25,14 +25,13 @@ const Users = ({ users, onDelete, toggleBookmark }) => {
         setCurrentPage(pageIndex);
     };
     const filteredUsers = selectedProf
-        ? users.filter((user) => user.profession === selectedProf)
+        ? users.filter((user) => user.profession._id === selectedProf._id)
         : users;
     const count = filteredUsers.length;
     const userCrop = paginate(filteredUsers, currentPage, pageSize);
     const clearFilter = () => {
         setSelectedProf();
     };
-
     return (
         <div className="d-flex">
             {professions && (
@@ -49,11 +48,10 @@ const Users = ({ users, onDelete, toggleBookmark }) => {
                         {" "}
                         Очистить{" "}
                     </button>
-                    <hr />
                 </div>
             )}
             <div className="d-flex flex-column">
-                <SearchStatus count={count} />
+                {users && <SearchStatus count={count} />}
                 {count > 0 && (
                     <table className="table">
                         <thead>
