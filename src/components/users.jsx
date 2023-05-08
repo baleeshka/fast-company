@@ -50,6 +50,19 @@ const Users = () => {
     const handleSort = (item) => {
         setSortBy(item);
     };
+    useEffect(() => {
+        if (users) {
+            const filteredUsers = selectedProf
+                ? users.filter(
+                    (user) => user.profession._id === selectedProf._id
+                )
+                : users;
+            const usersCrop = paginate(filteredUsers, currentPage, pageSize);
+            if (usersCrop.length === 0 && currentPage > 1) {
+                setCurrentPage(currentPage - 1);
+            }
+        }
+    }, [users]);
     if (users) {
         const filteredUsers = selectedProf
             ? users.filter((user) => user.profession._id === selectedProf._id)
