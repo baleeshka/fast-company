@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 const TableBody = ({ data, columns }) => {
     const renderContent = (item, column) => {
+        if (column === "name") {
+            const asd = _.get(item, columns[column].path);
+            return <a href={`users/${item._id}`}>{asd}</a>;
+        }
         if (columns[column].component) {
             const component = columns[column].component;
             if (typeof component === "function") {
@@ -17,9 +21,11 @@ const TableBody = ({ data, columns }) => {
         <tbody>
             {data.map((item) => (
                 <tr key={item._id}>
-                    {Object.keys(columns).map((column) => (
-                        <td key={column}>{renderContent(item, column)}</td>
-                    ))}
+                    {Object.keys(columns).map((column) => {
+                        return (
+                            <td key={column}>{renderContent(item, column)}</td>
+                        );
+                    })}
                 </tr>
             ))}
         </tbody>
